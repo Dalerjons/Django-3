@@ -1,24 +1,28 @@
-from django.urls import path
-from .views import *
+"""
+URL configuration for shop project.
 
-# Здесь будем писать пути для вюшек
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls.static import static
+from shop import settings
+
 urlpatterns = [
-    path('', ProductList.as_view(), name='product_list'),
-    path('category/<slug:slug>/', CategoryPage.as_view(), name='category_page'),
-    path('product/<slug:slug>/', ProductDetail.as_view(), name='product_detail'),
-    path('login/', user_login, name='login'),
-    path('logout', user_logout, name='logout'),
-    path('register/', register_user, name='register'),
-    path('save_review/<slug:slug>/', save_review, name='save_review'),
-    path('add_favorite/<slug:slug>/', save_favorite_product, name='add_favorite'),
-    path('my_favorite/', FavoriteProductView.as_view(), name='my_favorite'),
-    path('cart/', cart, name='my_cart'),
-    path('to_cart/<int:product_id>/<str:action>/', to_cart, name='to_cart'),
-    path('checkout/', checkout, name='checkout'),
-    path('payment/', create_checkout_session, name='payment'),
-    path('success/', success_payment, name='success'),
-    path('clear_cart/', clear_cart, name='clear_cart'),
-    path('save_mail/', save_mail, name='save_mail'),
-    path('send_mail/', send_mail_to_customer, name='send_mail'),
-
+    path('admin/', admin.site.urls),
+    path('', include('store.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
