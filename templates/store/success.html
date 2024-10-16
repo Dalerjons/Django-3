@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title%}
+
+{{ title }}
+
+{% endblock title%}
+
+
+{% block poster %}
+{% endblock poster %}
+
+
+{% block main%}
+
+<div class="container">
+    <div class="content text-center">
+        <h3>Thank you, your payment was successful</h3>
+        <p>Please wait for a connection with our manager</p>
+        <a href="{% url 'product_list' %}" class="btn btn-warning rounded m-4">Вернутся на главную</a>
+
+    </div>
+</div>
+
+
+{% endblock main%}
